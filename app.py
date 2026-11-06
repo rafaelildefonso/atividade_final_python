@@ -98,6 +98,17 @@ try:
 
             st.plotly_chart(fig, use_container_width=True)
 
+        with col2:
+            fig_bar = px.bar(
+                df_filtrado,
+                x="Estado",
+                y="IDH",
+                text="IDH",
+                labels={"IDH": "IDH", "Estado": "Estado"},
+            )
+            fig_bar.update_traces(texttemplate='%{text:.2f}', textposition='outside')
+            st.plotly_chart(fig_bar, use_container_width=True)
+
     else:
         st.warning("Nenhuma localidade selecionada nos filtros da barra lateral.")
 
