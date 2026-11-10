@@ -223,38 +223,47 @@ try:
 
 
         # ==========================================
-        # BOXPLOT
+        
+        # ==========================================
+        # BOXPLOT - FORMATO DE CAIXA
         # ==========================================
 
         st.markdown("---")
 
-        st.subheader(
-            "Dispersão dos índices de desenvolvimento"
-        )
+        st.subheader("Distribuição do IDH por estado")
 
         fig_box = px.box(
             df_filtrado,
             x="Estado",
             y="IDH",
             color="Estado",
-            points="outliers",
-            title="Boxplot - Distribuição do IDH por estado",
+            points="all",
+            notched=False,
+            title="Boxplot - Distribuição do IDH",
             labels={
                 "Estado": "Estado",
                 "IDH": "Índice de Desenvolvimento Humano"
             }
         )
 
+        fig_box.update_traces(
+            boxmean=True,
+            jitter=0.25,
+            pointpos=0
+        )
+
         fig_box.update_layout(
             showlegend=False,
             yaxis_title="IDH",
-            xaxis_title="Estados"
+            xaxis_title="Estados",
+            boxmode="group"
         )
 
         st.plotly_chart(
             fig_box,
             use_container_width=True
         )
+
 
 
     else:
